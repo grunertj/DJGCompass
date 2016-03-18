@@ -1,0 +1,85 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:keepScreenOn="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    android:windowSoftInputMode="stateAlwaysHidden"
+    tools:context="com.wg.werner_jensgrunert.bjgcompass.DestinationFragment">
+
+    <EditText
+        android:imeOptions="flagNoExtractUi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/destination_latitude"
+        android:inputType="numberDecimal"
+        android:id="@+id/editTextDestinationLatitude"
+        android:layout_marginTop="32dp"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:imeOptions="flagNoExtractUi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/destination_longitude"
+        android:inputType="numberDecimal"
+        android:id="@+id/editTextDestinationLongitude"
+        android:layout_below="@+id/editTextDestinationLatitude"
+        android:layout_alignLeft="@+id/editTextDestinationLatitude"
+        android:layout_alignStart="@+id/editTextDestinationLatitude" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Osmand"
+        android:id="@+id/buttonDestinationOsmand"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/activity_vertical_margin" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset"
+        android:id="@+id/buttonDestinationReset"
+        android:layout_alignTop="@+id/buttonDestinationOsmand"
+        android:layout_alignRight="@+id/editTextDestinationLongitude"
+        android:layout_alignEnd="@+id/editTextDestinationLongitude" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Dest. Long. :"
+        android:id="@+id/textViewDestLong"
+        android:layout_alignBaseline="@+id/editTextDestinationLongitude"
+        android:layout_alignBottom="@+id/editTextDestinationLongitude"
+        android:layout_alignParentLeft="true"
+         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Dest. Lat. :"
+        android:id="@+id/textViewDestLat"
+        android:layout_alignBaseline="@+id/editTextDestinationLatitude"
+        android:layout_alignBottom="@+id/editTextDestinationLatitude"
+        android:layout_alignParentLeft="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Help"
+        android:id="@+id/buttonHelp"
+        android:layout_alignBottom="@+id/buttonDestinationOsmand"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+</RelativeLayout>

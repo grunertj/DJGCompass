@@ -1,0 +1,59 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:keepScreenOn="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.wg.werner_jensgrunert.bjgcompass.DirectionFragment">
+    <com.wg.werner_jensgrunert.bjgcompass.SquareImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/background"
+        android:src="@drawable/kreis"/>
+    <com.wg.werner_jensgrunert.bjgcompass.SquareScaleImageView
+        android:layout_alignTop="@id/background"
+        android:layout_alignBottom="@id/background"
+        android:layout_alignLeft="@id/background"
+        android:layout_alignRight="@id/background"
+        android:id="@+id/needle"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleX="0.3"
+        android:scaleY="0.8"
+        android:scaleType="centerInside"
+        android:src="@drawable/pointeryellow"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="@dimen/direction_text_size"
+        android:text="Trip: 0 km"
+        android:id="@+id/textViewDrivenDistance"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="@dimen/direction_text_size"
+        android:text="Distance: 0 km"
+        android:id="@+id/textViewDestinationDistance"
+        android:layout_above="@+id/textViewDrivenDistance"
+        android:layout_alignRight="@+id/textViewDrivenDistance"
+        android:layout_alignEnd="@+id/textViewDrivenDistance" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="@dimen/direction_text_size"
+        android:text="Speed: 0 km/h"
+        android:id="@+id/textViewSpeed"
+        android:layout_above="@+id/textViewDestinationDistance"
+        android:layout_alignRight="@+id/textViewDestinationDistance"
+        android:layout_alignEnd="@+id/textViewDestinationDistance" />
+
+</RelativeLayout>
