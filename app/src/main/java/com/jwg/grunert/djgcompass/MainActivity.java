@@ -1,4 +1,4 @@
-package com.example.grunert.djgcompass;
+package com.jwg.grunert.djgcompass;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
