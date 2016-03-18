@@ -1,6 +1,7 @@
 package com.jwg.grunert.djgcompass;
 
 /*
+  Create new project and enable google map api
   https://console.developers.google.com/apis/credentials?project=djgcompass
   cd /home/grunert/AndroidStudioProjects/DJGCompass
   keytool -list -v -keystore djgcompass.keystore
