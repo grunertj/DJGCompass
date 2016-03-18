@@ -3,13 +3,13 @@
     android:keepScreenOn="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.wg.werner_jensgrunert.bjgcompass.DirectionFragment">
-    <com.wg.werner_jensgrunert.bjgcompass.SquareImageView
+    tools:context="com.jwg.grunert.djgcompass.DirectionFragment">
+    <com.jwg.grunert.djgcompass.SquareImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/background"
         android:src="@drawable/kreis"/>
-    <com.wg.werner_jensgrunert.bjgcompass.SquareScaleImageView
+    <com.jwg.grunert.djgcompass.SquareScaleImageView
         android:layout_alignTop="@id/background"
         android:layout_alignBottom="@id/background"
         android:layout_alignLeft="@id/background"

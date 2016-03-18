@@ -6,7 +6,7 @@
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true"
     android:windowSoftInputMode="stateAlwaysHidden"
-    tools:context="com.wg.werner_jensgrunert.bjgcompass.DestinationFragment">
+    tools:context="com.jwg.grunert.djgcompass.DestinationFragment">
 
     <EditText
         android:imeOptions="flagNoExtractUi"
