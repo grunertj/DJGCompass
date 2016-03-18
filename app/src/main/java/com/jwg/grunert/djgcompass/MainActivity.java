@@ -1,14 +1,9 @@
 package com.jwg.grunert.djgcompass;
 
 /*
-Error on Windows
-E/b: Authentication failed on the server.
-E/Google Maps Android API: Authorization failure.  Please see https://developers.google.com/maps/documentation/android/start for how to correctly set up the map.
-E/Google Maps Android API: In the Google Developer Console (https://console.developers.google.com)
-  Ensure that the "Google Maps Android API v2" is enabled.
-  Ensure that the following Android Key exists:
-  API Key: AIzaSyB2VEWA5xof5xDsTDzzukTPDZoCgm-QtZQ
-  Android Application (<cert_fingerprint>;<package_name>): 01:F1:90:18:7D:DF:4B:D2:E0:51:0A:8D:E8:56:50:70:39:0D:18:4D;com.jwg.grunert.djgcompass
+  https://console.developers.google.com/apis/credentials?project=djgcompass
+  cd /home/grunert/AndroidStudioProjects/DJGCompass
+  keytool -list -v -keystore djgcompass.keystore
 */
 
 import android.Manifest;
