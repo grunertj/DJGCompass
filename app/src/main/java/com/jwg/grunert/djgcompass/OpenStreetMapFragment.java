@@ -95,6 +95,7 @@ public class OpenStreetMapFragment extends Fragment {
         myWebView.getSettings().setUseWideViewPort(true);
         myWebView.getSettings().setLoadWithOverviewMode(true);
         myWebView.getSettings().setJavaScriptEnabled(true);
+        myWebView.getSettings().setDomStorageEnabled(true);
         myWebView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT); // load online by default
 
         if ( !isNetworkAvailable() ) { // loading offline

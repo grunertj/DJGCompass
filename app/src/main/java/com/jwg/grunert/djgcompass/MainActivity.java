@@ -25,6 +25,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -112,6 +113,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // https://code.google.com/p/android/issues/detail?id=2373#c21
+        if (!isTaskRoot()
+                && getIntent().hasCategory(Intent.CATEGORY_LAUNCHER)
+                && getIntent().getAction() != null
+                && getIntent().getAction().equals(Intent.ACTION_MAIN)) {
+            finish();
+            return;
+        }
+
         super.onCreate(savedInstanceState);
 
         // http://developer.android.com/intl/ko/training/system-ui/navigation.html
@@ -129,6 +139,29 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        // Possible work around for market launches. See http://code.google.com/p/android/issues/detail?id=2373
+// for more details. Essentially, the market launches the main activity on top of other activities.
+// we never want this to happen. Instead, we check if we are the root and if not, we finish.
+        /*
+        if (!isTaskRoot()) {
+            final Intent intent = getIntent();
+            final String intentAction = intent.getAction();
+            if (intent.hasCategory(Intent.CATEGORY_LAUNCHER) &&
+                intentAction != null && intentAction.equals(Intent.ACTION_MAIN)) {
+                finish();
+                return;
+            }
+        }
+        */
+
+
+
+
+
+
+
+
         // getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         preferences = new Preferences(this);
 
@@ -146,6 +179,8 @@ public class MainActivity extends AppCompatActivity {
                 jens = true;
             }
         }
+
+
 
         final LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
 
