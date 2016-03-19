@@ -27,7 +27,7 @@ import java.util.Locale;
 public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
     GoogleMap mMap;
     SupportMapFragment mapFragment;
-    static double zoom = 0;
+    static double zoom = 10;
 
     public GoogleMapFragment() {
         // Required empty public constructor
@@ -80,9 +80,8 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
         //mMap.clear();
         mMap.addMarker(new MarkerOptions().position(destination).title("Destination"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(destination));
-        if (zoom > 0 ) {
-            mMap.animateCamera( CameraUpdateFactory.zoomTo( (float)zoom ) );
-        }
+        mMap.animateCamera( CameraUpdateFactory.zoomTo( (float)zoom ) );
+
         //mMap.animateCamera( CameraUpdateFactory.zoomTo( 10.0f ) );
 
         Toast.makeText(getActivity().getApplicationContext(), "Google Maps ready, LatitudeDestination: "+LatitudeDestination+" LongitudeDestination "+LongitudeDestination, Toast.LENGTH_SHORT).show();
