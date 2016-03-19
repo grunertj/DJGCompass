@@ -25,8 +25,9 @@ import java.util.Locale;
  * http://stackoverflow.com/questions/19353255/how-to-put-google-maps-v2-on-a-fragment-using-viewpager
  */
 public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
-    static GoogleMap mMap;
-    static SupportMapFragment mapFragment;
+    GoogleMap mMap;
+    SupportMapFragment mapFragment;
+    static double zoom = 0;
 
     public GoogleMapFragment() {
         // Required empty public constructor
@@ -37,6 +38,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         RelativeLayout view = (RelativeLayout) inflater.inflate(R.layout.fragment_google_map, container, false);
+        setRetainInstance(true);
 /*
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment == null) {
@@ -51,6 +53,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
 */
         return view;
     }
+    // http://stackoverflow.com/questions/32168567/googlemap-in-fragment-goes-blank-at-orientation-change
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -60,6 +63,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             mapFragment = SupportMapFragment.newInstance();
+            mapFragment.setRetainInstance(true);
             fragmentTransaction.replace(R.id.map, mapFragment).commit();
         }
         if (mapFragment != null) {
@@ -73,10 +77,13 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
         double LatitudeDestination = MainActivity.preferences.getLatitudeDestination(Preferences.RETURN_AS_DOUBLE);
         double LongitudeDestination = MainActivity.preferences.getLongitudeDestination(Preferences.RETURN_AS_DOUBLE);
         LatLng destination = new LatLng(LatitudeDestination, LongitudeDestination);
-        mMap.clear();
+        //mMap.clear();
         mMap.addMarker(new MarkerOptions().position(destination).title("Destination"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(destination));
-        mMap.animateCamera( CameraUpdateFactory.zoomTo( 10.0f ) );
+        if (zoom > 0 ) {
+            mMap.animateCamera( CameraUpdateFactory.zoomTo( (float)zoom ) );
+        }
+        //mMap.animateCamera( CameraUpdateFactory.zoomTo( 10.0f ) );
 
         Toast.makeText(getActivity().getApplicationContext(), "Google Maps ready, LatitudeDestination: "+LatitudeDestination+" LongitudeDestination "+LongitudeDestination, Toast.LENGTH_SHORT).show();
 
@@ -119,4 +126,9 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        zoom = mMap.getCameraPosition().zoom;
+    }
 }

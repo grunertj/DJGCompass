@@ -13,6 +13,6 @@
     <string name="google_maps_key_ubuntu" templateMergeStrategy="preserve" translatable="false">AIzaSyB7-oZ62pyzfzUUKV13Zuc2P2e_V_39c_4</string>
     <string name="ubuntu_sha1">70:39:62:EC:FD:48:C3:04:5E:E5:96:A8:A2:84:E5:39:DB:65:5C:9D</string>
     <string name="windows_sha1">F0:77:37:45:E2:0D:24:8F:1C:74:96:2B:C9:97:6B:41:CA:91:5F:0F</string>
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAcTctKpK6Gfd2T957xsIEycqo_kZFZHuo</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyD0M12vBq8liEJMbYY2EE2Csf_hZPUKi6o</string>
     <string name="google_app_id">264723471785</string>
 </resources>
