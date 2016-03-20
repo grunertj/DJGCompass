@@ -243,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
         if (internet && play_services) {
             if (googleMapFragment == null) {
                 googleMapFragment = new GoogleMapFragment();
-                googleMapFragment.setRetainInstance(true);
+                googleMapFragment.setRetainInstance(false);
             }
         }
 

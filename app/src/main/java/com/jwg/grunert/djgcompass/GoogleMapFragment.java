@@ -15,19 +15,22 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.Locale;
+
+import static com.google.android.gms.maps.GoogleMap.*;
 
 /**
  * A simple {@link Fragment} subclass.
  * http://stackoverflow.com/questions/19353255/how-to-put-google-maps-v2-on-a-fragment-using-viewpager
  */
 public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
-    static GoogleMap mMap;
-    static SupportMapFragment mapFragment;
-    static double zoom = 0;
+     GoogleMap mMap;
+     SupportMapFragment mapFragment;
+    static double zoom = 10;
 
     public GoogleMapFragment() {
         // Required empty public constructor
@@ -38,7 +41,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         RelativeLayout view = (RelativeLayout) inflater.inflate(R.layout.fragment_google_map, container, false);
-        setRetainInstance(true);
+        setRetainInstance(false);
 /*
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment == null) {
@@ -65,6 +68,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
             mapFragment = SupportMapFragment.newInstance();
             mapFragment.setRetainInstance(true);
             fragmentTransaction.replace(R.id.map, mapFragment).commit();
+            getFragmentManager().executePendingTransactions();
         }
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
@@ -77,23 +81,33 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
         double LatitudeDestination = MainActivity.preferences.getLatitudeDestination(Preferences.RETURN_AS_DOUBLE);
         double LongitudeDestination = MainActivity.preferences.getLongitudeDestination(Preferences.RETURN_AS_DOUBLE);
         LatLng destination = new LatLng(LatitudeDestination, LongitudeDestination);
-        // mMap.clear();
+        mMap.clear();
 
-        // mMap.addMarker(new MarkerOptions().position(destination).title("Destination"));
+
+
+
+        mMap.addMarker(new MarkerOptions().position(destination).title("Destination"));
         // mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(destination, 10.0f));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(destination));
-        if (zoom == 0 ) {
-            mMap.animateCamera( CameraUpdateFactory.zoomTo( 10.0f/2 ) );
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(destination));
+
+        mMap.animateCamera(CameraUpdateFactory.zoomTo((float) zoom));
+
+
+
+
+
+        //if (zoom == 0 ) {
+        //    mMap.animateCamera( CameraUpdateFactory.zoomTo( 10.0f/2 ) );
             // mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(destination, 10.0f));
-        } else {
-            mMap.animateCamera(CameraUpdateFactory.zoomTo((float) zoom/2));
+        //} else {
+        //    mMap.animateCamera(CameraUpdateFactory.zoomTo((float) zoom/2));
             // mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(destination, (float)zoom));
-        }
+        //}
 
 
         Toast.makeText(getActivity().getApplicationContext(), "Google Maps ready, LatitudeDestination: " + zoom + " " +LatitudeDestination+" LongitudeDestination "+LongitudeDestination, Toast.LENGTH_LONG).show();
 
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+        mMap.setOnMapClickListener(new OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
                 Toast.makeText(getActivity().getApplicationContext(), latLng.latitude + " " + latLng.longitude, Toast.LENGTH_SHORT).show();
@@ -110,12 +124,13 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
-        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+        mMap.setOnMapLongClickListener(new OnMapLongClickListener() {
             @Override
             public void onMapLongClick(LatLng latLng) {
                 LatLng destination = new LatLng(latLng.latitude, latLng.longitude);
                 MainActivity.preferences.setDestination(latLng.latitude, latLng.longitude);
                 MainActivity.preferences.setPreference_provider("Google Map");
+
 
                 mMap.clear();
                 mMap.addMarker(new MarkerOptions().position(destination).title("Destination"));
@@ -126,6 +141,41 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
+/*
+        mMap.setOnCameraChangeListener(new OnCameraChangeListener() {
+            @Override
+            public void onCameraChange(CameraPosition cameraPosition) {
+                latLng = cameraPosition.target;
+        //        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 10));
+        //        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds());
+                // Remove listener to prevent position reset on camera move.
+                mMap.setOnCameraChangeListener(null);
+            }
+        });
+*/
+
+        /*
+
+        mMap.setOnMapLoadedCallback(new OnMapLoadedCallback() {
+            @Override
+            public void onMapLoaded() {
+                LatLng destination = new LatLng(MainActivity.preferences.getLatitudeDestination(Preferences.RETURN_AS_DOUBLE),
+                        MainActivity.preferences.getLongitudeDestination(Preferences.RETURN_AS_DOUBLE));
+
+                // mMap.clear();
+                mMap.addMarker(new MarkerOptions().position(destination).title("Destination"));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(destination));
+                mMap.animateCamera(CameraUpdateFactory.zoomTo((float) zoom));
+
+                //Toast.makeText(getActivity().getApplicationContext(), "Google Maps loaded, " +
+                //        "LatitudeDestination: " + zoom + " " +destination.latitude+" LongitudeDestination "
+                //        +destination.longitude, Toast.LENGTH_LONG).show();
+
+            }
+        });
+        */
+
+        /*
         mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
             @Override
             public void onMapLoaded() {
@@ -145,6 +195,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
 
             }
         });
+        */
     }
 
 
@@ -155,13 +206,15 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
             if (isVisibleToUser && isResumed()) {
                 LatLng destination = new LatLng(MainActivity.preferences.getLatitudeDestination(Preferences.RETURN_AS_DOUBLE),
                         MainActivity.preferences.getLongitudeDestination(Preferences.RETURN_AS_DOUBLE));
-                mMap.clear();
-                mMap.addMarker(new MarkerOptions().position(destination).title("Destination"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(destination));
-                if (zoom == 0 ) {
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(10.0f));
-                } else {
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo((float)zoom));
+                if (mMap != null) {
+                    mMap.clear();
+                    mMap.addMarker(new MarkerOptions().position(destination).title("Destination"));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(destination));
+                    if (zoom == 0) {
+                        mMap.animateCamera(CameraUpdateFactory.zoomTo(10.0f));
+                    } else {
+                        mMap.animateCamera(CameraUpdateFactory.zoomTo((float) zoom));
+                    }
                 }
             } else if (isResumed()) {
                 // MainActivity.preferences.setDestination(LatitudeDestination,LongitudeDestination);
@@ -170,6 +223,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
                 }
             }
         }
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
